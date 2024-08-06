@@ -84,3 +84,24 @@
     margin-bottom: 20px;
     padding-left: 20px;
   }
+
+  .image_wrapper{
+    position: relative;
+    /* background-color: rgb(131, 132, 132); */
+    margin: 0 auto 20px auto;
+    max-width: 400px; 
+
+  }
+
+  .image{
+    width: 400px;
+  }
+
+  .image_caption{
+    bottom: 0;
+    left: 10px;
+    position: absolute;
+    color: rgb(159, 158, 158);
+    font-size: small;
+    width: 100%;
+  }

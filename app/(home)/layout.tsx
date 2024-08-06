@@ -1,6 +1,5 @@
 import { GeistSans } from "geist/font/sans";
 import "../globals.css";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 

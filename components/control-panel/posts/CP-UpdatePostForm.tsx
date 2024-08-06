@@ -88,7 +88,7 @@ const UpdatePostForm = () => {
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <FormLabel>Meta Title</FormLabel>
-                                                    <FormDescription>50 - 60 characters</FormDescription>
+                                                    <FormDescription>50 - 60 chars</FormDescription>
                                                     <FormControl>
                                                         <Input className=" w-[500px]" {...field} />
                                                     </FormControl>
@@ -135,7 +135,7 @@ const UpdatePostForm = () => {
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <FormLabel>Meta Description</FormLabel>
-                                                    <FormDescription>120 - 158 characters</FormDescription>
+                                                    <FormDescription>120 - 158 chars</FormDescription>
                                                     <FormControl>
                                                         <Textarea className=" h-[80px] w-[500px]" {...field} />
                                                     </FormControl>

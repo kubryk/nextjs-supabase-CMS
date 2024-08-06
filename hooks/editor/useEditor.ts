@@ -24,11 +24,16 @@ const useEditor = () => {
             //Місяць та рік завантаження медіа
             const date = createMediaPath(media);
             //Медіа в вигляді html
-            const htmlMedia = `<img style="width: 400px; margin: 0 auto;" src="${process.env.NEXT_PUBLIC_APP_HOST}media/${date.year}/${date.month}/${media.name}" alt="${media.alt}"/>`;
+            const newHtmlMedia =
+                `<div class="image_wrapper">
+                <img class="image" src="/media/${date.year}/${date.month}/${media.name}" alt="${media.alt}" alt="${media.alt}"/>
+                <div class="image_caption">${media.caption}</div>
+                </div>`
+            const htmlMedia = `<img style="width: 400px; margin: 0 auto;" src="/media/${date.year}/${date.month}/${media.name}" alt="${media.alt}"/>`;
             //Розділяємо посимвольно весь контент з поля форми
             const splittedFormValue = form.getValues()[formFieldName].split('');
             //Добавляємо медіа в масив символів контенту
-            splittedFormValue.splice(textAreaRef.current.selectionStart, 0, htmlMedia);
+            splittedFormValue.splice(textAreaRef.current.selectionStart, 0, newHtmlMedia);
             //Склеюємо массив символів в строку
             const modifiedFormValue: string = splittedFormValue.join('');
             //Вставляємо строку з добавленим медіа в форму
