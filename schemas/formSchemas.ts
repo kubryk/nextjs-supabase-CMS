@@ -36,5 +36,5 @@ export const mediaFormSchema = z.object({
     caption: z.string(),
     name: z.string().optional(),
     uploaded_to: z.string().optional(),
-
+    tags: z.string().optional()
 })

@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { deleteMediaFromDb, deleteMediaFromServer } from "@/features/media/deleteMediaSlice";
 import { fetchAllMedia, fetchPostMedia, setSelectedMedia } from "@/features/media/MediaGalerySlice";
+import { updateMedia } from "@/features/media/updateMediaSlice";
 
 
 const MediaEditor = () => {
@@ -22,8 +23,11 @@ const MediaEditor = () => {
     const dispatch = useAppDispatch();
     const { form, onSubmit, onInvalid } = useUpdateMediaForm();
 
-
     if (selectedMedia) {
+        const selectedMediaTags = JSON.parse(selectedMedia.tags);
+
+        console.log(form.getValues('tags'))
+
         const { mediaPath } = createMediaPath(selectedMedia);
 
         const deleteMediaOnClick = () => {
@@ -39,6 +43,8 @@ const MediaEditor = () => {
             if (mediaGaleryPost) dispatch(fetchPostMedia(mediaGaleryPost));
         }
 
+
+
         return (
             <div className=" flex-2 bg-slate-400 max-h-[650px] overflow-auto p-3 ">
                 <div className="flex flex-col items-center justify-center gap-3">
@@ -51,8 +57,8 @@ const MediaEditor = () => {
                     />
 
                     <Form {...form}>
-                        {/* <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="space-y-8"> */}
-                        <form className="space-y-8">
+                        <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="space-y-8">
+                            {/* <form className="space-y-8"> */}
 
                             <FormField
                                 disabled
@@ -80,7 +86,7 @@ const MediaEditor = () => {
                                     <FormItem>
                                         <FormLabel>Post</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input {...field} onBlur={form.handleSubmit(onSubmit)} />
                                         </FormControl>
                                         <FormDescription>
                                             This is the post for witch media was uploaded.
@@ -97,7 +103,7 @@ const MediaEditor = () => {
                                     <FormItem>
                                         <FormLabel>Alt</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input {...field} onBlur={form.handleSubmit(onSubmit)} />
                                         </FormControl>
                                         <FormDescription>
                                             This is media alt.
@@ -113,7 +119,7 @@ const MediaEditor = () => {
                                     <FormItem>
                                         <FormLabel>Caption</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input {...field} onBlur={form.handleSubmit(onSubmit)} />
                                         </FormControl>
                                         <FormDescription>
                                             This is media caption.
@@ -129,7 +135,7 @@ const MediaEditor = () => {
                                     <FormItem>
                                         <FormLabel>Description</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input {...field} onBlur={form.handleSubmit(onSubmit)} />
                                         </FormControl>
                                         <FormDescription>
                                             This is media description.
@@ -138,12 +144,45 @@ const MediaEditor = () => {
                                     </FormItem>
                                 )}
                             />
+
+
+                            <FormField
+                                control={form.control}
+                                name="tags"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Tags</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            <div className=" flex flex-col gap-1">
+                                                <div className=" flex gap-1 flex-wrap max-w-[200px]">
+                                                    {selectedMedia.tags && selectedMediaTags.map((tag: string, index: number) => {
+                                                        return (
+                                                            <div className=" bg-green-300 rounded-lg p-1 cursor-pointer hover:bg-red-500">
+                                                                {tag}
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                                <Button onSubmit={(e) => console.log('message')}>Add tag</Button>
+                                            </div>
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+
+
                             <div className="flex gap-7 justify-center">
-                                <Button
-                                    onSubmit={(e) => form.handleSubmit(onSubmit, onInvalid)}
+                                {/* <Button
+                                    type='submit'
+                                // onSubmit={(e) => form.handleSubmit(onSubmit, onInvalid)}
                                 >
                                     Update
-                                </Button>
+                                </Button> */}
 
                                 <Button
                                     variant={'destructive'}
@@ -161,5 +200,6 @@ const MediaEditor = () => {
         );
     }
 }
+
 
 export default MediaEditor;

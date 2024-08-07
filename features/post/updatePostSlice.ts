@@ -199,7 +199,6 @@ export const UpdatePostFormSlice = createSlice({
                 Toast.error(action.payload.error.details)
                 return
             }
-            console.log(action.payload.data)
             //Записуємо дані з сервера у змінну
             state.featuredMedia = action.payload.data
             //Виключаємо завантаження

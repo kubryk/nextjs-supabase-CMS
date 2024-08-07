@@ -55,6 +55,8 @@ export const deleteMediaLocalyAction = async (path: string) => {
     fs.unlink(path, (err) => console.log(err))
 }
 
+
+
 export const createMediaAction = async (media: { name: string, uploaded_to: string }): Promise<PostgrestSingleResponse<MediaType>> => {
     const supabase = useSupabase();
     const result: PostgrestSingleResponse<MediaType> = await supabase
@@ -78,12 +80,14 @@ export const deleteMediaFromDbAction = async (mediaId: string): Promise<Postgres
 
 
 export const updateMediaAction = async (data: MediaDataType, mediaId: string): Promise<PostgrestSingleResponse<MediaType>> => {
+    console.log(data)
     const supabase = useSupabase();
     const result: PostgrestSingleResponse<MediaType> = await supabase
         .from('media')
         .update({ ...data })
         .eq('id', mediaId)
         .single();
+    console.log(result)
     return result;
 }
 

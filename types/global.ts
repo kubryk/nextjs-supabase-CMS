@@ -46,6 +46,8 @@ export type MediaType = {
     caption: string
     created_at: string
     uploaded_to: string
+    created_by: string
+    tags: string
 }
 
-export type MediaDataType = Omit<MediaType, 'id' | 'created_at'>
+export type MediaDataType = Omit<MediaType, 'id' | 'created_at' | 'created_by'>

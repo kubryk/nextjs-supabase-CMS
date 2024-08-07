@@ -23,7 +23,8 @@ const useUpdateMediaForm = () => {
                 description: selectedMedia.description,
                 caption: selectedMedia.caption,
                 name: selectedMedia.name,
-                uploaded_to: selectedMedia.uploaded_to
+                uploaded_to: selectedMedia.uploaded_to,
+                tags: selectedMedia.tags
             })
         }
     }, [selectedMedia])

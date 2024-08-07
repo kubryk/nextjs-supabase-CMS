@@ -35,7 +35,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
                     <img class="image" src="http://localhost:3000/media/2024/7/tattoo_third_447530865_18413354962069581_5281590481390354766_n.jpg" />
                     <div class="image_caption">@caption</div>
                 </div> */}
-                {/* <a href="https://instagram.com/tattooassist">@tattooassist</a> */}
+                {/* <a target="_blank" href="https://instagram.com/tattooassist">@tattooassist</a> */}
             </Container>
         )
     }

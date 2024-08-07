@@ -75,8 +75,6 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
                         </DialogClose>
                     </DialogFooter>
                 </DialogContent>
-
-
             </Dialog>
 
             <FormField
