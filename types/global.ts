@@ -1,5 +1,6 @@
 export type PostType = {
     id: string
+    created_by: string
     title: string
     meta_title: string
     description: string
