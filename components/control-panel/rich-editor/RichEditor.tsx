@@ -21,7 +21,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useFormContext } from "react-hook-form";
 import MediaGalery from "../media-galery/MediaGalery";
-import { ForwardRefExoticComponent, RefAttributes, useRef } from "react";
+import { useRef } from "react";
+import { createPortal } from 'react-dom';
 import { Button } from "@/components/ui/button";
 import { fetchAllMedia } from "@/features/media/MediaGalerySlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
@@ -43,7 +44,9 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
     } = useMediaGalery({ editorField: editorFieldRef, fieldName, form })
 
     return (
+
         <div className="flex flex-col">
+            {/* {createPortal( */}
             <Dialog>
                 <DialogTrigger asChild>
                     <Button onClick={() => dispatch(fetchAllMedia())} variant="outline">
@@ -75,7 +78,10 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
                         </DialogClose>
                     </DialogFooter>
                 </DialogContent>
-            </Dialog>
+            </Dialog>,
+            {/* document.body
+            )} */}
+
 
             <FormField
                 // disabled={loadings.update}
@@ -94,6 +100,7 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
                 )}
             />
         </div >
+
     );
 }
 

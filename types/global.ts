@@ -14,7 +14,7 @@ export type PostType = {
     featured_image: string
 }
 
-export type PostDataType = Omit<PostType, 'id' | 'created_at'>;
+export type PostDataType = Omit<PostType, 'id' | 'created_at' | 'created_by'>;
 
 export type UserCredentialType = {
     email: string
@@ -32,7 +32,7 @@ export type CategoryDataType = Omit<PostCategoryType, 'id' | 'created_at'>;
 export type AuthorsType = {
     id: string,
     name: string,
-    descrition: string,
+    description: string,
     created_at: string,
     photo: string,
     whois: string

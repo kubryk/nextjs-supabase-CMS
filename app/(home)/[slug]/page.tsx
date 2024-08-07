@@ -1,11 +1,12 @@
+import { fetchAuthorByAction } from "@/actions/Author-Actions";
+import { fetchMediaByAction } from "@/actions/Media-Actions";
 import { fetchSinglePostByAction } from "@/actions/Post-Actions";
 import Container from "@/components/Container";
+import AuthorField from "@/components/home/post/AuthorField";
 import useSupabase from "@/hooks/useSupabase";
+import createMediaPath from "@/utils/mediaPath";
+import Image from "next/image";
 
-// export const metadata = {
-//     title: "Test",
-//     description: "Test"
-// }
 
 export const generateMetadata = async ({ params }: { params: { slug: string } }) => {
     const post = await fetchSinglePostByAction('url', params.slug);
@@ -15,12 +16,11 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
             description: post.data?.meta_description
         }
     }
-
 }
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
-
-    const post = await fetchSinglePostByAction('url', params.slug)
+    const post = await fetchSinglePostByAction('url', params.slug);
+    if (!post.data) return <>Post not found</>
 
     if (post.data) {
         const convertedDate = new Date(post.data.created_at).toLocaleDateString('en-ZA');
@@ -28,14 +28,13 @@ export default async function PostPage({ params }: { params: { slug: string } })
             <Container>
                 <article className="flex flex-col items-center gap-5 max-w-4xl">
                     <h2 className=" text-4xl">{post.data.title}</h2>
-                    <div>{convertedDate}</div>
+                    <div className="flex gap-3 text-[12px] text-gray-500 w-[100%] mt-4">
+                        <div>Published: {convertedDate}</div>
+                        <div>Updated: {convertedDate}</div>
+                    </div>
+                    <AuthorField authorId={post.data.author} />
                     <div className=" text-lg" dangerouslySetInnerHTML={{ __html: post.data.content }} />
                 </article>
-                {/* <div class="image_wrapper">
-                    <img class="image" src="http://localhost:3000/media/2024/7/tattoo_third_447530865_18413354962069581_5281590481390354766_n.jpg" />
-                    <div class="image_caption">@caption</div>
-                </div> */}
-                {/* <a target="_blank" href="https://instagram.com/tattooassist">@tattooassist</a> */}
             </Container>
         )
     }
