@@ -1,14 +1,17 @@
 export type PostType = {
     id: string
     created_by: string
+    created_at: string
+    updated_at: string
+
     title: string
     meta_title: string
     description: string
     meta_description: string
     content: string
+
     category: string
     author: string
-    created_at: string
     status: string
     url: string
     featured_image: string

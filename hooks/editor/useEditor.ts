@@ -26,7 +26,7 @@ const useEditor = () => {
             //Медіа в вигляді html
             const newHtmlMedia =
                 `<div class="image_wrapper">
-                <img class="image" src="/media/${date.year}/${date.month}/${media.name}" alt="${media.alt}" alt="${media.alt}"/>
+                <img class="image" src="/media/${date.year}/${date.month}/${media.name}" alt="${media.alt}"/>
                 <div class="image_caption">${media.caption}</div>
                 </div>`
             const htmlMedia = `<img style="width: 400px; margin: 0 auto;" src="/media/${date.year}/${date.month}/${media.name}" alt="${media.alt}"/>`;

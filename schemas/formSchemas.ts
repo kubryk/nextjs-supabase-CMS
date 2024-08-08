@@ -13,7 +13,8 @@ export const postFormSchema = z.object({
 
     status: z.string().min(2, { message: "Status must be at least 2 characters.", }),
     media: z.any(),
-    featured_image: z.string()
+    featured_image: z.string(),
+    updated_at: z.string()
 })
 
 

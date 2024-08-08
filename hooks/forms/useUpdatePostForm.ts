@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -24,7 +24,7 @@ import { createMediaAction, saveMediaLocalyAction } from "@/actions/Media-Action
 const useUpdatePostForm = (postId: string) => {
     const dispatch = useAppDispatch();
     const { loadings, post, featuredMedia, categories, authors, update } = useAppSelector(state => state.updatePost);
-
+    const [updateDate, setUpdateDate] = useState(new Date().toISOString());
 
     useEffect(() => {
         //Фетчимо пост
@@ -49,6 +49,7 @@ const useUpdatePostForm = (postId: string) => {
     }, [post])
 
 
+
     const form = useForm<z.infer<typeof postFormSchema>>({
         resolver: zodResolver(postFormSchema),
         mode: 'onChange',
@@ -62,7 +63,8 @@ const useUpdatePostForm = (postId: string) => {
             author: post.author,
             status: post.status,
             content: post.content,
-            featured_image: post.featured_image
+            featured_image: post.featured_image,
+            updated_at: updateDate
         } : undefined
     });
 

@@ -111,14 +111,12 @@ export const fetchSingleMediaByAction = async (column: string, value: string): P
     return result;
 }
 
-export const fetchMediaByAction = async (column: string, value: string): Promise<PostgrestSingleResponse<MediaType>> => {
+export const fetchMediaByAction = async (column: string, value: string): Promise<PostgrestSingleResponse<MediaType[]>> => {
     const supabase = useSupabase();
-    const result: PostgrestSingleResponse<MediaType> = await supabase
+    const result: PostgrestSingleResponse<MediaType[]> = await supabase
         .from('media')
         .select()
         .eq(column, value)
-        .limit(1)
-        .single()
     return result;
 }
 

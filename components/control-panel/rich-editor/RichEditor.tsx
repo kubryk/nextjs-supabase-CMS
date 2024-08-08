@@ -46,7 +46,6 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
     return (
 
         <div className="flex flex-col">
-            {/* {createPortal( */}
             <Dialog>
                 <DialogTrigger asChild>
                     <Button onClick={() => dispatch(fetchAllMedia())} variant="outline">
@@ -78,9 +77,8 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
                         </DialogClose>
                     </DialogFooter>
                 </DialogContent>
-            </Dialog>,
-            {/* document.body
-            )} */}
+            </Dialog>
+
 
 
             <FormField
@@ -90,7 +88,7 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
                 render={({ field }) => (
                     <FormItem>
                         <FormControl>
-                            <Textarea defaultValue={field.value} className=" h-[600px] w-[1000px]" {...field} ref={editorFieldRef} />
+                            <Textarea defaultValue={field.value} className=" h-[600px] w-[1000px] overflow-x-auto" {...field} ref={editorFieldRef} />
                         </FormControl>
                         <FormDescription>
                             This is post content.

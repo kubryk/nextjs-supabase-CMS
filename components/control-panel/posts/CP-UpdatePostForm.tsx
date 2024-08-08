@@ -33,6 +33,7 @@ import { PuffLoader } from "react-spinners";
 import { fetchAuthors, fetchCategories, fetchFeaturedMedia, fetchPost, nullFeaturedMedia, nullPost } from "@/features/post/updatePostSlice";
 import { FormProvider, useController } from "react-hook-form";
 import RichEditor from "../rich-editor/RichEditor";
+import { format } from 'date-fns'
 
 
 
@@ -53,7 +54,8 @@ const UpdatePostForm = () => {
     const { form, onSubmit, onChangeFiles, onInvalid } = useUpdatePostForm(postId);
     //States
     const { loadings, post, featuredMedia, categories, authors, update } = useAppSelector(state => state.updatePost);
-
+    // const createDate = new Date(post.created_at).toLocaleDateString('en-ZA');
+    // const lastUpdateDate = new Date(post?.updated_at).toLocaleDateString('en-ZA');
 
 
     return (
@@ -247,8 +249,8 @@ const UpdatePostForm = () => {
                                 </div>
 
 
-                                <div className=" flex w-[300px] h-[300px] flex-col items-center justify-center gap-2 pt-6">
-                                    <div className=" font-semibold text-sm">Featured Image</div>
+                                <div className=" flex flex-col items-center justify-start gap-2 pt-6">
+                                    {/* <div className=" font-semibold text-sm">Featured Image</div> */}
                                     {loadings.featuredMedia && <PuffLoader />}
                                     {featuredMedia &&
                                         <Image
@@ -259,6 +261,8 @@ const UpdatePostForm = () => {
                                             src={`/media/${createMediaPath(featuredMedia).mediaPath}`}
                                         />
                                     }
+                                    {post.created_at && <div>Created: {format(post.created_at, "PPpp")}</div>}
+                                    {post.updated_at && <div>Updated: {format(post.updated_at, "PPpp")}</div>}
                                 </div>
                             </div>
 

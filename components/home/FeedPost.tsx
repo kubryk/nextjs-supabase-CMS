@@ -6,6 +6,7 @@ import createMediaPath from "@/utils/mediaPath";
 import { fetchCategoriesByAction, fetchSingleCategoryByAction } from "@/actions/Category-Actions";
 import { fetchAuthorByAction } from "@/actions/Author-Actions";
 import { fetchMediaByAction, fetchSingleMediaByAction } from "@/actions/Media-Actions";
+import { format } from 'date-fns'
 
 const FeedPost = async ({ postData }: { postData: PostType }) => {
     const postCategory = await fetchSingleCategoryByAction('id', postData.category)
@@ -42,7 +43,7 @@ const FeedPost = async ({ postData }: { postData: PostType }) => {
                 <div className="text-ellipsis">{postData.description}</div>
                 <div className="flex gap-8 items-center">
                     {postAuthor.data && <Link className=" text-[11px]" href={'/'}>by <span className=" text-[13px] font-medium">{postAuthor.data.name}</span></Link>}
-                    <Link className=" text-[12px]" href={'/'}>{convertedDate}</Link>
+                    <Link className=" text-[12px]" href={'/'}>{format(postData.updated_at, "PPP")}</Link>
                 </div>
 
             </div>

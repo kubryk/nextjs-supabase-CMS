@@ -4,27 +4,21 @@ import { usePathname } from "next/navigation";
 import Container from "../Container";
 import { useEffect, useState } from "react";
 import { fetchCategoriesAction } from "@/actions/Category-Actions";
-import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { PostCategoryType } from "@/types/global";
 import { Router } from "next/router";
+import { createClient } from "@/utils/supabase/server";
+import CPNavigation from "../control-panel/CP-Navigation";
 
 const Navigation = async () => {
-    // const currentPathName = usePathname();
-    // const [categories, setCategories] = useState<PostCategoryType[] | null>()
-
-    // useEffect(() => {
-    //     const fetchCategories = async () => {
-    //         const result: PostgrestSingleResponse<PostCategoryType[]> = await fetchCategoriesAction()
-    //         setCategories(result.data)
-    //     }
-    //     fetchCategories()
-    // }, [])
-
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
     const categories = await fetchCategoriesAction();
 
     return (
         <nav className="flex-1 w-full flex flex-col items-center pt-7 pb-7">
+            {user && <CPNavigation />}
             <Container>
+
                 <ul className="flex flex-row gap-8 justify-center items-center flex-wrap text-lg list-none p-0">
                     <Link href={'/'}>Home</Link>
                     {categories.data && categories.data.map((category) => {
