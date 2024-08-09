@@ -18,6 +18,57 @@ export default async function PostPage({ params }: { params: { slug: string } })
     const post = await fetchSinglePostByAction('url', params.slug);
     if (!post.data) return <>Post not found</>
 
+    const captionOpen = /\[caption]/;
+    const captionClose = /\[\/caption]/;
+
+    const captionedTag: RegExp = /\[caption\].{1,}\[\/caption\]/g;
+    const imgRegExp: RegExp = /\<img.{1,}\/>/g;
+    const captionRegExp: RegExp = /\/>.{1,}\[\/caption]/;
+
+    //Шукаємо всі img з шорткодом caption
+    const shortcodedImages = post.data.content.matchAll(captionedTag);
+    //Перетворюємо в массив
+    const shortcodesArr = Array.from(shortcodedImages);
+
+    //TODO: баг якщо в тексті кепшону буде самозакривний тег
+
+
+    const shortcodesData = shortcodesArr.map((shortcodedTag) => {
+        //Чистий тег img
+        const cleanImg = shortcodedTag[0].match(imgRegExp)![0];
+        //Індекс за якийм шорткод розміщений в повному тексті статті
+        const startIndex = shortcodedTag['index'];
+        //Довжина шорткоду
+        const shortcodeLength = shortcodedTag[0].split('').length;
+        //Чистимо текст caption від неботребу
+        const cleanCaption = shortcodedTag[0].match(captionRegExp)![0].replace(captionClose, '').replace('/>', '');
+
+
+        const taggedImg = `<div class="image_wrapper">` + cleanImg;
+        const taggedCaption = `<div class="image_caption">` + cleanCaption + `</div></div>`
+
+        return {
+            cleanImg,
+            cleanCaption,
+            taggingResult: taggedImg + taggedCaption,
+            startIndex,
+            shortcodeLength
+        }
+    });
+
+
+    // console.log(shortcodesData)
+
+    let copyPost = post.data.content;
+
+    for (let index = 0; index < shortcodesData.length; index++) {
+        copyPost = copyPost.replace(/\[caption\].{1,}\[\/caption\]/, shortcodesData[index].taggingResult)
+
+    }
+
+    console.log(copyPost)
+
+
     return (
         <Container>
             <article className="flex flex-col items-center gap-5 max-w-4xl">
@@ -26,7 +77,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
                     <div>Last updated on {format(post.data.updated_at, "PPP")}</div>
                 </div>
                 <AuthorBox authorId={post.data.author} />
-                <div className=" text-lg" dangerouslySetInnerHTML={{ __html: post.data.content }} />
+                <div className=" text-lg" dangerouslySetInnerHTML={{ __html: copyPost }} />
             </article>
         </Container>
     )

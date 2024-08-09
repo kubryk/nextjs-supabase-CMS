@@ -29,11 +29,16 @@ const useEditor = () => {
                 <img class="image" src="/media/${date.year}/${date.month}/${media.name}" alt="${media.alt}"/>
                 <div class="image_caption">${media.caption}</div>
                 </div>`
+
+
+            const rigthHtmlMedia = `[caption]<img class="image" src="/media/${date.year}/${date.month}/${media.name}" alt="${media.alt}"/>${media.caption}[/caption]`
+
+
             const htmlMedia = `<img style="width: 400px; margin: 0 auto;" src="/media/${date.year}/${date.month}/${media.name}" alt="${media.alt}"/>`;
             //Розділяємо посимвольно весь контент з поля форми
             const splittedFormValue = form.getValues()[formFieldName].split('');
             //Добавляємо медіа в масив символів контенту
-            splittedFormValue.splice(textAreaRef.current.selectionStart, 0, newHtmlMedia);
+            splittedFormValue.splice(textAreaRef.current.selectionStart, 0, rigthHtmlMedia);
             //Склеюємо массив символів в строку
             const modifiedFormValue: string = splittedFormValue.join('');
             //Вставляємо строку з добавленим медіа в форму
