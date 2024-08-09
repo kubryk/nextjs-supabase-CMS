@@ -55,9 +55,6 @@ const UpdatePostForm = () => {
     const { form, onSubmit, onChangeFiles, onInvalid } = useUpdatePostForm(postId);
     //States
     const { loadings, post, featuredMedia, categories, authors, update } = useAppSelector(state => state.updatePost);
-    // const createDate = new Date(post.created_at).toLocaleDateString('en-ZA');
-    // const lastUpdateDate = new Date(post?.updated_at).toLocaleDateString('en-ZA');
-
 
     return (
         <div>

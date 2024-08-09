@@ -37,6 +37,7 @@ const useUpdateMediaForm = () => {
 
 
     const onSubmit = async (data: any) => {
+        console.log(data)
         if (selectedMedia) {
             //Апдейт медіа
             dispatch(updateMedia({ data, mediaId: selectedMedia.id }));
