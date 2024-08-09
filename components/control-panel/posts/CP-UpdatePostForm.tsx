@@ -34,6 +34,7 @@ import { fetchAuthors, fetchCategories, fetchFeaturedMedia, fetchPost, nullFeatu
 import { FormProvider, useController } from "react-hook-form";
 import RichEditor from "../rich-editor/RichEditor";
 import { format } from 'date-fns'
+import Link from "next/link";
 
 
 
@@ -261,8 +262,9 @@ const UpdatePostForm = () => {
                                             src={`/media/${createMediaPath(featuredMedia).mediaPath}`}
                                         />
                                     }
-                                    {post.created_at && <div>Created: {format(post.created_at, "PPpp")}</div>}
-                                    {post.updated_at && <div>Updated: {format(post.updated_at, "PPpp")}</div>}
+                                    {<div>Created: {format(post.created_at, "PPpp")}</div>}
+                                    {<div>Updated: {format(post.updated_at, "PPpp")}</div>}
+                                    {<Link className=" text-blue-600" href={`/${post.url}`}>Go to post</Link>}
                                 </div>
                             </div>
 
