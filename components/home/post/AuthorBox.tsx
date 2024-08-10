@@ -1,7 +1,7 @@
 import { fetchAuthorByAction } from "@/actions/Author-Actions";
 import { fetchMediaByAction, fetchSingleMediaByAction } from "@/actions/Media-Actions";
 import { AuthorsType } from "@/types/global"
-import createMediaPath from "@/utils/mediaPath";
+import createMediaPath from "@/lib/mediaPath";
 import Image from "next/image"
 import { SlSocialInstagram, SlSocialFacebook } from "react-icons/sl";
 import { FaFacebookSquare, FaInstagramSquare } from "react-icons/fa";

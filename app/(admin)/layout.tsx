@@ -1,6 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import "../globals.css";
-import CPNavigation from "@/components/control-panel/CP-Navigation";
+import DashboardNav from "@/components/dashboard/DashboardNav";
 import { Toaster } from "sonner";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -24,10 +24,10 @@ export default function RootLayout({
         <html lang="en" className={GeistSans.className}>
             <body>
                 <main className="min-h-screen flex flex-col items-center ">
-                    <CPNavigation />
+                    <DashboardNav />
                     {children}
                 </main>
-                <Toaster richColors expand={true}/>
+                <Toaster richColors expand={true} />
             </body>
         </html>
     );

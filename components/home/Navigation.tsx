@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { fetchCategoriesAction } from "@/actions/Category-Actions";
 import { PostCategoryType } from "@/types/global";
 import { Router } from "next/router";
-import { createClient } from "@/utils/supabase/server";
-import CPNavigation from "../control-panel/CP-Navigation";
+import { createClient } from "@/lib/supabase/server";
+import DashboardNav from "../dashboard/DashboardNav";
 
 const Navigation = async () => {
     const supabase = createClient();
@@ -16,7 +16,7 @@ const Navigation = async () => {
 
     return (
         <nav className="flex-1 w-full flex flex-col items-center pt-7 pb-7">
-            {user && <CPNavigation />}
+            {user && <DashboardNav />}
             <Container>
 
                 <ul className="flex flex-row gap-8 justify-center items-center flex-wrap text-lg list-none p-0">

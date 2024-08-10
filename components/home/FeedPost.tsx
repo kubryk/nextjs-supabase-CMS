@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PostType } from "@/types/global";
-import createMediaPath from "@/utils/mediaPath";
+import createMediaPath from "@/lib/mediaPath";
 import { fetchCategoriesByAction, fetchSingleCategoryByAction } from "@/actions/Category-Actions";
 import { fetchAuthorByAction } from "@/actions/Author-Actions";
 import { fetchMediaByAction, fetchSingleMediaByAction } from "@/actions/Media-Actions";
