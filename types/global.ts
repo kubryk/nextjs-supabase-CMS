@@ -38,8 +38,11 @@ export type AuthorsType = {
     description: string,
     created_at: string,
     photo: string,
-    whois: string
+    whois: string,
+    url: string
 }
+
+export type AuthorDataType = Omit<AuthorsType, 'id' | 'created_at'>;
 
 export type MediaType = {
     id: string

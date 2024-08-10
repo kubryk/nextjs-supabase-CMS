@@ -9,6 +9,8 @@ export class ControlPanelLinks {
   static createCategory: string = ControlPanelLinks.categories + "/create";
   static updateCategory: string = ControlPanelLinks.categories + "/update";
 
+  static authors: string = ControlPanelLinks.home + '/authors'
+
   static media: string = ControlPanelLinks.home + "/media";
 
 }

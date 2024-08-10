@@ -1,6 +1,6 @@
 'use server'
 import useSupabase from '@/hooks/useSupabase'
-import { AuthorsType } from '@/types/global';
+import { AuthorDataType, AuthorsType } from '@/types/global';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 
@@ -23,26 +23,15 @@ export const fetchAuthorByAction = async (column: string, value: string): Promis
     return result;
 }
 
-
-// export const fetchAuthorsAction = async (): Promise<PostgrestSingleResponse<AuthorsType[]>> => {
-//     const supabase = useSupabase();
-//     const result = await supabase
-//         .from('authors')
-//         .select();
-//     return result;
-// }
-
-// export const fetchAuthorByIdAction = async (data: { authorId: string }): Promise<PostgrestSingleResponse<AuthorsType>> => {
-//     const supabase = useSupabase();
-//     const result: PostgrestSingleResponse<AuthorsType> = await supabase
-//         .from('authors')
-//         .select()
-//         .eq('id', data.authorId)
-//         .limit(1)
-//         .single();
-//     return result;
-// }
-
+export const updateAuthorAction = async (id: string, data: AuthorDataType): Promise<PostgrestSingleResponse<AuthorsType>> => {
+    const supabase = useSupabase();
+    const result: PostgrestSingleResponse<AuthorsType> = await supabase
+        .from('authors')
+        .update(data)
+        .eq('id', id)
+        .single();
+    return result;
+}
 
 
 

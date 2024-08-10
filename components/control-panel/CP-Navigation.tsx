@@ -10,7 +10,7 @@ const CPNavigation = async () => {
     return (
         <div className="w-full flex justify-center border-b border-b-foreground/10 h-16">
             {user &&
-                <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
+                <div className="w-full max-w-5xl flex justify-between items-center p-3 text-sm">
                     <div className="flex gap-5">
                         <Link href={'/'}>Website</Link>
                         <Link href={ControlPanelLinks.home}>Control Panel</Link>
@@ -19,6 +19,7 @@ const CPNavigation = async () => {
                         <Link href={ControlPanelLinks.categories}>Categories</Link>
                         <Link href={ControlPanelLinks.createCategory}>Add category</Link>
                         <Link href={ControlPanelLinks.media}>Media</Link>
+                        <Link href={ControlPanelLinks.authors}>Authors</Link>
                     </div>
                     <AuthButton />
                 </div>

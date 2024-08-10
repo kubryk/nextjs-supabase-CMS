@@ -39,14 +39,6 @@
 
 
 
-
-
-
-
-
-
-
-
 //     //     shortcodesData.forEach((value, index) => {
 //     //     post.data.content = post.data.content.replace(/\[caption\].{1,}\[\/caption\]/, value.taggingResult)
 //     // })
