@@ -1,3 +1,5 @@
+
+
 export class ControlPanelLinks {
   static home: string = "/dashboard";
 
@@ -10,6 +12,7 @@ export class ControlPanelLinks {
   static updateCategory: string = ControlPanelLinks.categories + "/update";
 
   static authors: string = ControlPanelLinks.home + '/authors'
+  static createAuthor: string = ControlPanelLinks.home + `/authors/?action=create`
 
   static media: string = ControlPanelLinks.home + "/media";
 

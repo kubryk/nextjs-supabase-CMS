@@ -1,3 +1,7 @@
+import createAuthorSlice from '@/features/authors/createAuthorSlice'
+import deleteAuthorSlice from '@/features/authors/deleteAuthorSlice'
+import fetchAuthorsSlice from '@/features/authors/fetchAuthorsSlice'
+import updateAuthorSlice from '@/features/authors/updateAuthorSlice'
 import deleteMediaSlice from '@/features/media/deleteMediaSlice'
 import mediaGalerySlice from '@/features/media/MediaGalerySlice'
 import updateMediaSlice from '@/features/media/updateMediaSlice'
@@ -10,12 +14,17 @@ export const store = configureStore({
     reducer: {
         updateMedia: updateMediaSlice,
         deleteMedia: deleteMediaSlice,
+        mediaGalery: mediaGalerySlice,
 
         fetchPosts: fetchPostsSlice,
-        // createPost: createPostSlice,
         updatePost: updatePostSlice,
-        mediaGalery: mediaGalerySlice,
-        deletePost: deletePostSlice
+        deletePost: deletePostSlice,
+
+        fetchAuthors: fetchAuthorsSlice,
+        updateAuthors: updateAuthorSlice,
+        createAuthors: createAuthorSlice,
+        deleteAuthors: deleteAuthorSlice,
+
     }
 })
 

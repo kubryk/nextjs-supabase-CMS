@@ -1,16 +1,13 @@
 
+import Insights from "@/components/dashboard/DashboardInsights";
 import { createClient } from "@/lib/supabase/server";
+import StoreProvider from "@/providers/StoreProvider";
+import { format } from "date-fns/format";
 import { redirect } from "next/navigation";
-import MediaProvider from "@/providers/MediaProvider";
-import MediaGalery from "@/components/dashboard/media-galery/MediaGalery";
-import RichEditor from "@/components/dashboard/media-galery/rich-editor/RichEditor";
-import NestedForm from "@/tests/nestedForm";
-import ShortCodes from "@/tests/shortcodes";
 
 
-export default async function ControlPanelPage({ searchParams }: { searchParams: { id: string } }) {
+export default async function Dashboard({ searchParams }: { searchParams: { id: string } }) {
   const supabase = createClient();
-
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
@@ -19,9 +16,12 @@ export default async function ControlPanelPage({ searchParams }: { searchParams:
 
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      {/* <NestedForm /> */}
-      <ShortCodes />
-    </div>
+    <StoreProvider>
+      <div className="flex-1 w-full flex flex-col items-center">
+        Welcome {user.email}
+        {user.last_sign_in_at && <div>Last login: {format(user.last_sign_in_at, 'PPpp')}</div>}
+        <Insights />
+      </div>
+    </StoreProvider>
   );
 }

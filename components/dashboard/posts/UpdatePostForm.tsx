@@ -40,14 +40,13 @@ import Link from "next/link";
 
 
 const UpdatePostForm = () => {
-
     const dispatch = useAppDispatch();
     const router = useRouter();
     const postId = useSearchParams().get('id');
 
     //Якщо в посиланні немає ід переадресовуємо на сторінку всіх постів
     if (!postId) {
-        router.push('/control-panel/posts')
+        router.push('/dashboard/posts')
         return <div>Post id not found</div>
     }
 

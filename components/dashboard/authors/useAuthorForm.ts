@@ -1,12 +1,27 @@
 'use client'
-import { updateAuthorAction } from "@/actions/Author-Actions"
+import { createSingleAuthorAction, updateAuthorAction } from "@/actions/Author-Actions"
+import { createAuthor } from "@/features/authors/createAuthorSlice"
+import { fetchUpdatingAuthor, updateAuthor } from "@/features/authors/updateAuthorSlice"
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux"
 import { AuthorsType } from "@/types/global"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 
-const useAuthorForm = (author: AuthorsType) => {
+const useAuthorForm = ({ authorId, action }: { authorId?: string, action: "update" | "create" }) => {
+    const dispatch = useAppDispatch();
+    const { results, loadings, errors } = useAppSelector(state => state.updateAuthors);
+
+    useEffect(() => {
+        if (authorId && action === 'update') {
+            form.reset()
+            dispatch(fetchUpdatingAuthor(authorId));
+        }
+    }, [])
+
+
 
     const formSchema = z.object({
         name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -18,20 +33,31 @@ const useAuthorForm = (author: AuthorsType) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        values: author ? {
-            name: author.name,
-            whois: author.whois,
-            description: author.description,
-            url: author.url,
-            photo: author.photo,
-        } : undefined,
+        values: results.fetch ? {
+            name: results.fetch.name,
+            whois: results.fetch.whois,
+            description: results.fetch.description,
+            url: results.fetch.url,
+            photo: results.fetch.photo,
+        } : {
+            name: '123',
+            whois: '123',
+            description: '123',
+            url: '123',
+            photo: '55df49fc-816d-4ec3-8fef-73995ba356f7'
+        },
         mode: "onChange",
     })
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
-        console.log(data)
-        const updatedAuthor = await updateAuthorAction(author.id, data);
-        console.log(updatedAuthor)
+        if (action === 'create') {
+            dispatch(createAuthor(data))
+            return
+        }
+        if (authorId && action === 'update') {
+            dispatch(updateAuthor({ id: authorId, data }))
+            return
+        }
     }
 
     return { form, onSubmit }

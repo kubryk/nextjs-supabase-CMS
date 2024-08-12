@@ -1,40 +1,34 @@
 'use server'
-import { fetchAuthorByAction, fetchAuthorsAction } from "@/actions/Author-Actions";
-import Container from "@/components/Container";
+import { fetchAuthorByAction } from "@/actions/Author-Actions";
 import AuthorForm from "@/components/dashboard/authors/AuthorForm";
 import DashboardAuthors from "@/components/dashboard/authors/Authors";
-import { Button } from "@/components/ui/button";
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import { format } from "date-fns";
-import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import StoreProvider from "@/providers/StoreProvider";
 
 
 const Authors = async ({ searchParams }: { searchParams: { id?: string, action?: 'create' | 'update' } }) => {
 
-    if (searchParams.action === 'create') {
-        return <div>create author</div>
+    if (searchParams.id && searchParams.action === 'update') {
+        return (
+            <StoreProvider>
+                <AuthorForm authorId={searchParams.id} action='update' />
+            </StoreProvider>
+        )
     }
 
-    if (searchParams.id && searchParams.action === 'update') {
-        const author = await fetchAuthorByAction('id', searchParams.id);
-        if (!author.data) return <div>Author not found</div>
-
-        return <AuthorForm author={author.data} />
+    if (searchParams.action === 'create') {
+        return (
+            <StoreProvider>
+                <AuthorForm action='create' />
+            </StoreProvider>
+        )
     }
 
     return (
-        <>
+        <StoreProvider>
             <DashboardAuthors />
-        </>
-    );
+        </StoreProvider>
+    )
 }
 
 export default Authors;

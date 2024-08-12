@@ -1,8 +1,10 @@
 import { fetchSinglePostByAction } from "@/actions/Post-Actions";
 import Container from "@/components/Container";
 import AuthorBox from "@/components/home/post/AuthorBox";
+import { createClient } from "@/lib/supabase/server";
 
 import { format } from 'date-fns'
+import Link from "next/link";
 
 export const generateMetadata = async ({ params }: { params: { slug: string } }) => {
     const post = await fetchSinglePostByAction('url', params.slug);
@@ -17,6 +19,9 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
 export default async function PostPage({ params }: { params: { slug: string } }) {
     const post = await fetchSinglePostByAction('url', params.slug);
     if (!post.data) return <>Post not found</>
+
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
     // const captionOpen = /\[caption]/;
     // const captionClose = /\[\/caption]/;
@@ -91,16 +96,20 @@ export default async function PostPage({ params }: { params: { slug: string } })
         post.data.content = post.data.content.replace(/\[caption\].{1,}\[\/caption\]/, value.taggedResult)
     })
 
-    console.log(post.data.content)
-
-
 
 
     return (
         <Container>
-            <article className="flex flex-col items-center gap-5 max-w-4xl">
+            <article className="flex flex-col items-center gap-5 max-w-4xl pt-8">
                 <h2 className=" text-4xl">{post.data.title}</h2>
-                <div className="flex gap-3 text-[12px] text-gray-500 w-[100%] ">
+                {user &&
+                    <Link
+                        className=" bg-indigo-300 rounded-md px-9 py-1 text-sm hover:bg-indigo-500 hover:text-white transition-all duration-300"
+                        href={`/dashboard/posts/update/?id=${post.data.id}`}
+                    >
+                        Edit post
+                    </Link>}
+                <div className="flex gap-3 text-[12px] text-gray-500 w-[100%]">
                     <div>Last updated on {format(post.data.updated_at, "PPP")}</div>
                 </div>
                 <AuthorBox authorId={post.data.author} />
