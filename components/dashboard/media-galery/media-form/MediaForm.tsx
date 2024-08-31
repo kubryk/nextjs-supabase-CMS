@@ -1,4 +1,4 @@
-import useUpdateMediaForm from "./media-list/useUpdateMediaForm";
+import useUpdateMediaForm from "./useUpdateMediaForm";
 import createMediaPath from "@/lib/mediaPath";
 import Image from "next/image";
 import {
@@ -44,10 +44,11 @@ const MediaForm = () => {
 
     return (
 
-        <div className=" flex-2 bg-slate-400 max-h-[650px] overflow-auto p-3 ">
+        <div className=" h-[calc(100vh-50px)] min-w-[300px] overflow-auto p-3 border-l-[2px] border-gray-200">
             {selectedMedia &&
                 <div className="flex flex-col items-center justify-center gap-3">
                     <Image
+                        className="rounded-lg"
                         key={selectedMedia.id}
                         alt={selectedMedia.alt}
                         src={`/media/${mediaPath}`}
@@ -56,8 +57,7 @@ const MediaForm = () => {
                     />
 
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="space-y-8">
-                            {/* <form className="space-y-8"> */}
+                        <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="space-y-2 w-full">
 
                             <FormField
                                 disabled
@@ -67,11 +67,11 @@ const MediaForm = () => {
                                     <FormItem>
                                         <FormLabel>Name</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input className=" bg-white" {...field} />
                                         </FormControl>
-                                        <FormDescription>
+                                        {/* <FormDescription>
                                             This is media file name.
-                                        </FormDescription>
+                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -85,11 +85,11 @@ const MediaForm = () => {
                                     <FormItem>
                                         <FormLabel>Post</FormLabel>
                                         <FormControl>
-                                            <Input {...field} onBlur={form.handleSubmit(onSubmit)} />
+                                            <Input className=" bg-white" {...field} onBlur={form.handleSubmit(onSubmit)} />
                                         </FormControl>
-                                        <FormDescription>
+                                        {/* <FormDescription>
                                             This is the post for witch media was uploaded.
-                                        </FormDescription>
+                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -102,11 +102,11 @@ const MediaForm = () => {
                                     <FormItem>
                                         <FormLabel>Alt</FormLabel>
                                         <FormControl>
-                                            <Input {...field} onBlur={form.handleSubmit(onSubmit)} />
+                                            <Input className=" bg-white" {...field} onBlur={form.handleSubmit(onSubmit)} />
                                         </FormControl>
-                                        <FormDescription>
+                                        {/* <FormDescription>
                                             This is media alt.
-                                        </FormDescription>
+                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -118,11 +118,11 @@ const MediaForm = () => {
                                     <FormItem>
                                         <FormLabel>Caption</FormLabel>
                                         <FormControl>
-                                            <Input {...field} onBlur={form.handleSubmit(onSubmit)} />
+                                            <Input className=" bg-white" {...field} onBlur={form.handleSubmit(onSubmit)} />
                                         </FormControl>
-                                        <FormDescription>
+                                        {/* <FormDescription>
                                             This is media caption.
-                                        </FormDescription>
+                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -134,11 +134,11 @@ const MediaForm = () => {
                                     <FormItem>
                                         <FormLabel>Description</FormLabel>
                                         <FormControl>
-                                            <Input {...field} onBlur={form.handleSubmit(onSubmit)} />
+                                            <Input className=" bg-white" {...field} onBlur={form.handleSubmit(onSubmit)} />
                                         </FormControl>
-                                        <FormDescription>
+                                        {/* <FormDescription>
                                             This is media description.
-                                        </FormDescription>
+                                        </FormDescription> */}
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -152,7 +152,7 @@ const MediaForm = () => {
                                     <FormItem>
                                         <FormLabel>Tags</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input className=" bg-white" {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             {/* <div className=" flex flex-col gap-1">

@@ -1,5 +1,5 @@
 'use server'
-import CreatePost from "@/components/dashboard/posts/CreatePostForm";
+import CreatePostTemplates from "@/components/dashboard/posts/CreatePostTemplates";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -13,9 +13,7 @@ export default async function CreatePostPage() {
 
     return (
         <div className="flex-1 w-full flex flex-col gap-20 items-center">
-            <div>
-                <CreatePost />
-            </div>
+            <CreatePostTemplates created_by={user.id} />
         </div>
     );
 }

@@ -1,7 +1,10 @@
 import { GeistSans } from "geist/font/sans";
 import "../globals.css";
-import DashboardNav from "@/components/dashboard/DashboardNav";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Toaster } from "sonner";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import StoreProvider from "@/providers/StoreProvider";
+
 
 const defaultUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
@@ -22,13 +25,25 @@ export default function RootLayout({
 
     return (
         <html lang="en" className={GeistSans.className}>
-            <body>
-                <main className="min-h-screen flex flex-col items-center ">
-                    <DashboardNav />
-                    {children}
-                </main>
-                <Toaster richColors expand={true} />
-            </body>
+            <StoreProvider>
+                <body>
+                    <main className="min-h-screen flex ">
+                        <DashboardSidebar />
+
+                        <div className="flex flex-col w-full">
+                            <DashboardHeader />
+
+                            {/* <div className=" w-auto h-full overflow-auto "> */}
+                            {children}
+                            {/* </div> */}
+                        </div>
+
+
+
+                    </main>
+                    <Toaster richColors expand={true} />
+                </body>
+            </StoreProvider>
         </html>
     );
 }

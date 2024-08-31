@@ -18,13 +18,16 @@ import useEditor from "../media-galery/rich-editor/useRichEditor";
 import { useAppDispatch, useAppSelector } from "../../../hooks/useRedux";
 import { fetchAuthors, fetchCategories, fetchFeaturedMedia, fetchPost, nullFeaturedMedia, nullPost, updatePost } from "@/features/post/updatePostSlice";
 import { createMediaAction, saveMediaLocalyAction } from "@/actions/Media-Actions";
+import { useRouter } from "next/navigation";
 
 
 
 const useUpdatePostForm = (postId: string) => {
+    const router = useRouter();
     const dispatch = useAppDispatch();
     const { loadings, post, featuredMedia, categories, authors, update } = useAppSelector(state => state.updatePost);
     const [updateDate, setUpdateDate] = useState(new Date().toISOString());
+
 
     useEffect(() => {
         //Фетчимо пост
@@ -64,9 +67,16 @@ const useUpdatePostForm = (postId: string) => {
             status: post.status,
             content: post.content,
             featured_image: post.featured_image,
-            updated_at: updateDate
+            updated_at: updateDate,
+            scheduled_at: post.scheduled_at
         } : undefined
     });
+
+    useEffect(() => {
+        if (form.watch('status') !== 'schedule') form.setValue('scheduled_at', null)
+    }, [form.watch('status')])
+
+
 
     //Хендлер завантаження медіа
     const onChangeFiles = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +99,9 @@ const useUpdatePostForm = (postId: string) => {
 
     //хендлер сабміту форми
     const onSubmit = async (data: z.infer<typeof postFormSchema>) => {
+        console.log(data)
         dispatch(updatePost({ data, postId }))
+        // if (!update?.error) window.location.reload()
     }
     return { form, onSubmit, onChangeFiles, onInvalid };
 }

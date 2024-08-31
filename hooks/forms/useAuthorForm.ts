@@ -15,8 +15,8 @@ const useAuthorForm = ({ authorId, action }: { authorId?: string, action: "updat
     const { results, loadings, errors } = useAppSelector(state => state.updateAuthors);
 
     useEffect(() => {
+        form.reset()
         if (authorId && action === 'update') {
-            form.reset()
             dispatch(fetchUpdatingAuthor(authorId));
         }
     }, [])
@@ -40,10 +40,10 @@ const useAuthorForm = ({ authorId, action }: { authorId?: string, action: "updat
             url: results.fetch.url,
             photo: results.fetch.photo,
         } : {
-            name: '123',
-            whois: '123',
-            description: '123',
-            url: '123',
+            name: 'Jhon Doe',
+            whois: 'Tattoo artist',
+            description: 'Best tattoo artist in the world',
+            url: 'jhon-doe',
             photo: '55df49fc-816d-4ec3-8fef-73995ba356f7'
         },
         mode: "onChange",

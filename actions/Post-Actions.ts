@@ -26,7 +26,6 @@ export interface IFetchPageOfCategoryPostsBy extends IFetchPageOfPostsBy {
 }
 
 
-
 //Створити пост
 export const createSinglePostAction = async (data: PostDataType): Promise<PostgrestSingleResponse<PostType>> => {
     const supabase = useSupabase();
@@ -34,7 +33,7 @@ export const createSinglePostAction = async (data: PostDataType): Promise<Postgr
         .from('posts')
         .insert(data)
         .select()
-        .limit(1)
+        // .limit(1)
         .single()
     return result;
 }

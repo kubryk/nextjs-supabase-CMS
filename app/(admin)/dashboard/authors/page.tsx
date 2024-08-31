@@ -8,25 +8,28 @@ import StoreProvider from "@/providers/StoreProvider";
 
 const Authors = async ({ searchParams }: { searchParams: { id?: string, action?: 'create' | 'update' } }) => {
 
-    if (searchParams.id && searchParams.action === 'update') {
-        return (
-            <StoreProvider>
-                <AuthorForm authorId={searchParams.id} action='update' />
-            </StoreProvider>
-        )
-    }
+    // if (searchParams.id && searchParams.action === 'update') {
+    //     return (
+    //         <StoreProvider>
+    //             <AuthorForm authorId={searchParams.id} action='update' />
+    //         </StoreProvider>
+    //     )
+    // }
 
-    if (searchParams.action === 'create') {
-        return (
-            <StoreProvider>
-                <AuthorForm action='create' />
-            </StoreProvider>
-        )
-    }
+    // if (searchParams.action === 'create') {
+    //     return (
+    //         <StoreProvider>
+    //             <AuthorForm action='create' />
+    //         </StoreProvider>
+    //     )
+    // }
 
     return (
         <StoreProvider>
-            <DashboardAuthors />
+            <div className=" flex gap-5 w-full h-full p-3">
+                <DashboardAuthors className="w-full " />
+                <AuthorForm action='create' className="w-[300px] " />
+            </div>
         </StoreProvider>
     )
 }

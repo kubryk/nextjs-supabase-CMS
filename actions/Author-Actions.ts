@@ -52,7 +52,7 @@ export const createSingleAuthorAction = async (data: AuthorDataType): Promise<Po
 export const deleteSingleAuthorAction = async (authorId: string): Promise<PostgrestSingleResponse<null>> => {
     const supabase = useSupabase();
     const result: PostgrestSingleResponse<null> = await supabase
-        .from('auhotrs')
+        .from('authors')
         .delete()
         .eq('id', authorId)
     return result;

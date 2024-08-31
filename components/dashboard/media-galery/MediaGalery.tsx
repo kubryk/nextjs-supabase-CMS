@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux"
 import { RefObject } from "react"
 import { setSelectedMedia } from "@/features/media/MediaGalerySlice"
 import MediaList from "./media-list/MediaList"
-import MediaForm from "./MediaForm"
+import MediaForm from "./media-form/MediaForm"
 import { PostType } from "@/types/global"
 import useMediaGalery from "./useMediaGalery"
 
@@ -20,8 +20,6 @@ interface IMediaGaleryProps {
     form?: any
     fieldName?: string
 }
-
-
 
 
 const MediaGalery = ({ post, editorField, fieldName }: IMediaGaleryProps) => {
@@ -63,19 +61,25 @@ const MediaGalery = ({ post, editorField, fieldName }: IMediaGaleryProps) => {
 
                 </TabsList>
 
-                {media && <TabsContent className="flex" value="allmedia">
-                    <MediaList type='allMedia' />
-                    {selectedMedia && <MediaForm />}
-                </TabsContent>}
+                {media &&
+                    <TabsContent className="flex" value="allmedia">
+                        <MediaList type='allMedia' />
+                        {selectedMedia && <MediaForm />}
+                    </TabsContent>
+                }
 
-                {postMedia && <TabsContent className="flex" value="postmedia">
-                    <MediaList type='postMedia' />
-                    {selectedMedia && <MediaForm />}
-                </TabsContent>}
+                {postMedia &&
+                    <TabsContent className="flex" value="postmedia">
+                        <MediaList type='postMedia' />
+                        {selectedMedia && <MediaForm />}
+                    </TabsContent>
+                }
 
-                {post && <TabsContent className="flex" value="uploadmedia">
-                    <input type="file" multiple onChange={(e) => onChangeUploadFiles(e)} />
-                </TabsContent>}
+                {post &&
+                    <TabsContent className="flex" value="uploadmedia">
+                        <input type="file" multiple onChange={(e) => onChangeUploadFiles(e)} />
+                    </TabsContent>
+                }
             </Tabs>
 
         </div>

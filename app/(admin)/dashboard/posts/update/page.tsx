@@ -13,10 +13,8 @@ export default async function EditPostPage() {
     }
 
     return (
-        <div>
-            <StoreProvider>
-                <UpdatePostForm />
-            </StoreProvider>
-        </div>
+        <StoreProvider>
+            <UpdatePostForm />
+        </StoreProvider>
     );
 }

@@ -17,11 +17,7 @@ export default async function Dashboard({ searchParams }: { searchParams: { id: 
 
   return (
     <StoreProvider>
-      <div className="flex-1 w-full flex flex-col items-center">
-        Welcome {user.email}
-        {user.last_sign_in_at && <div>Last login: {format(user.last_sign_in_at, 'PPpp')}</div>}
-        <Insights />
-      </div>
+      <Insights />
     </StoreProvider>
   );
 }

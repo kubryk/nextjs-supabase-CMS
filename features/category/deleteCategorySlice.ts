@@ -1,33 +1,34 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { createSingleAuthorAction, deleteSingleAuthorAction, fetchAuthorsAction } from '@/actions/Author-Actions';
-import { AuthorDataType, AuthorsType } from '@/types/global';
+import { AuthorDataType, AuthorsType, PostCategoryType } from '@/types/global';
 import { toast as Toast } from "sonner";
 import { PostgrestError } from '@supabase/supabase-js';
+import { deleteCategoryAction } from '@/actions/Category-Actions';
 
-interface DeleteAuthorState {
-    deleteResult: AuthorsType | null;
+interface DeleteCategoryState {
+    deleteResult: PostCategoryType | null;
     deleteLoading: boolean;
     deleteError: PostgrestError | null;
 }
 
-const initialState: DeleteAuthorState = {
+const initialState: DeleteCategoryState = {
     deleteResult: null,
     deleteLoading: false,
     deleteError: null,
 };
 
-export const deleteAuthor = createAsyncThunk('authors/deleteAuthor', async (authorData: string) => {
-    const result = await deleteSingleAuthorAction(authorData);
+export const deleteCategory = createAsyncThunk('categories/deleteCategory', async (data: string) => {
+    const result = await deleteCategoryAction(data);
     return result;
 });
 
-export const deleteAuthorSlice = createSlice({
-    name: 'deleteAuthor',
+export const deleteCategorySlice = createSlice({
+    name: 'deleteCategory',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(deleteAuthor.pending, (state) => {
+            .addCase(deleteCategory.pending, (state) => {
                 //Enable loading
                 state.deleteLoading = true
                 //Clear error
@@ -35,7 +36,7 @@ export const deleteAuthorSlice = createSlice({
                 //Show loading message
                 Toast.loading('Loading...')
             })
-            .addCase(deleteAuthor.fulfilled, (state, action) => {
+            .addCase(deleteCategory.fulfilled, (state, action) => {
 
                 if (action.payload.error) {
                     //Save error to variable
@@ -56,9 +57,9 @@ export const deleteAuthorSlice = createSlice({
                 //Close loading message
                 Toast.dismiss()
                 //Show success message
-                Toast.success('Author successfully deleted')
+                Toast.success('Category successfully deleted')
             })
-            .addCase(deleteAuthor.rejected, (state, action) => {
+            .addCase(deleteCategory.rejected, (state, action) => {
                 //Disable loading
                 state.deleteLoading = false
                 //Close loading message
@@ -67,4 +68,4 @@ export const deleteAuthorSlice = createSlice({
     },
 });
 
-export default deleteAuthorSlice.reducer;
+export default deleteCategorySlice.reducer;

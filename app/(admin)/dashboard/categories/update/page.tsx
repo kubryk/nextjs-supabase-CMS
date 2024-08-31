@@ -1,21 +1,24 @@
 
-import UpdateCategoryForm from "@/components/dashboard/categories/UpdateCategoryForm";
-import { createClient } from "@/lib/supabase/server";
+import CategoryForm from "@/components/dashboard/categories/CategoryForm";
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import { IoChevronBack } from "react-icons/io5";
 
-const UpdateCategoryPage = async () => {
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-        return redirect("/login");
+const CreateCategoryPage = ({ searchParams }: { searchParams: { id: string } }) => {
+    if (!searchParams.id) {
+        redirect('/dashboard/categories')
     }
 
-
     return (
-        <>
-            <UpdateCategoryForm />
-        </>
+        <div className="flex flex-col w-full h-full justify-start items-center p-4">
+            <Link className=" flex gap-1 items-center w-full justify-start" href="/dashboard/categories">
+                <IoChevronBack size={30} />
+                <span>Back</span>
+            </Link>
+
+            <CategoryForm className="border-[2px] border-gray-200 p-10" action="update" categoryId={searchParams.id} />
+        </div>
     );
 }
 
-export default UpdateCategoryPage;
+export default CreateCategoryPage;

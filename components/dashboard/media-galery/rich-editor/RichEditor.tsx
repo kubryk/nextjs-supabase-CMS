@@ -29,6 +29,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { PostType } from "@/types/global";
 import useMediaGalery from "../useMediaGalery";
 import { DialogTriggerProps } from "@radix-ui/react-dialog";
+import { RiImageAddLine } from "react-icons/ri";
 
 
 const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) => {
@@ -48,8 +49,8 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
         <div className="flex flex-col">
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button onClick={() => dispatch(fetchAllMedia())} variant="outline">
-                        Media
+                    <Button className=" w-[75px]" onClick={() => dispatch(fetchAllMedia())} variant="outline">
+                        <RiImageAddLine color="yellowgreen" size={25} />
                     </Button>
                 </DialogTrigger>
                 <DialogContent className=" min-w-[90%] min-h-[650px]">
@@ -82,17 +83,13 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
 
 
             <FormField
-                // disabled={loadings.update}
                 control={form.control}
                 name={fieldName}
                 render={({ field }) => (
                     <FormItem>
-                        <FormControl>
-                            <Textarea defaultValue={field.value} className=" h-[600px] w-[1000px] overflow-x-auto" {...field} ref={editorFieldRef} />
+                        <FormControl className=" bg-white">
+                            <Textarea defaultValue={field.value} className=" h-[600px] w-full overflow-x-auto" {...field} ref={editorFieldRef} />
                         </FormControl>
-                        <FormDescription>
-                            This is post content.
-                        </FormDescription>
                         <FormMessage />
                     </FormItem>
                 )}

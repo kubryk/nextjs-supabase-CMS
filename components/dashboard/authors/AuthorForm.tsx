@@ -12,13 +12,14 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import useAuthorForm from "./useAuthorForm";
+import useAuthorForm from "../../../hooks/forms/useAuthorForm";
 import { Textarea } from "@/components/ui/textarea";
 import { AuthorsType } from "@/types/global";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { HTMLAttributes, ReactNode, useCallback, useEffect, useState } from "react";
 import { PuffLoader } from "react-spinners";
 import { useDropzone } from "react-dropzone";
+import { cn } from "@/lib/utils";
 
 // const thumbsContainer = {
 //     display: 'flex',
@@ -51,8 +52,13 @@ import { useDropzone } from "react-dropzone";
 //     height: '100%'
 // };
 
+interface AuthorFormProps extends HTMLAttributes<HTMLDivElement> {
+    action: 'update' | 'create',
+    authorId?: string
+}
 
-const AuthorForm = ({ action, authorId }: { action: 'update' | 'create', authorId?: string }) => {
+
+const AuthorForm = ({ action, authorId, className, ...rest }: AuthorFormProps) => {
     const { form, onSubmit } = useAuthorForm({ authorId, action });
     const { results, loadings, errors } = useAppSelector(state => state.updateAuthors);
 
@@ -87,10 +93,10 @@ const AuthorForm = ({ action, authorId }: { action: 'update' | 'create', authorI
     // }, []);
 
     return (
-        <Container>
+        <div {...rest} className={cn('p-3 border-[2px] border-gray-200', className)}>
             {/* {loadings.fetch && <PuffLoader />} */}
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className=" flex flex-col gap-2">
                     <FormField
                         control={form.control}
                         name="name"
@@ -100,9 +106,6 @@ const AuthorForm = ({ action, authorId }: { action: 'update' | 'create', authorI
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
-                                <FormDescription>
-                                    This is author public display name.
-                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -112,13 +115,10 @@ const AuthorForm = ({ action, authorId }: { action: 'update' | 'create', authorI
                         name="whois"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>About</FormLabel>
+                                <FormLabel>Whois</FormLabel>
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
-                                <FormDescription>
-                                    This is author public display name.
-                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -130,11 +130,8 @@ const AuthorForm = ({ action, authorId }: { action: 'update' | 'create', authorI
                             <FormItem>
                                 <FormLabel>Description</FormLabel>
                                 <FormControl>
-                                    <Textarea className="w-[500px] h-[100px]"  {...field} />
+                                    <Textarea className="h-[100px]"  {...field} />
                                 </FormControl>
-                                <FormDescription>
-                                    This is author public display name.
-                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -148,9 +145,6 @@ const AuthorForm = ({ action, authorId }: { action: 'update' | 'create', authorI
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
-                                <FormDescription>
-                                    This is author public display name.
-                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -165,13 +159,13 @@ const AuthorForm = ({ action, authorId }: { action: 'update' | 'create', authorI
                         </aside>
                     </section> */}
 
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">{action === 'create' ? 'Create' : 'Update'}</Button>
                 </form>
             </Form>
 
 
 
-        </Container>
+        </div>
     );
 }
 

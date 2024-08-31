@@ -4,6 +4,7 @@ import { store } from "@/store/store";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { Provider } from "react-redux";
+import StaticMediaGalery from "@/components/dashboard/media-galery/StaticMediaGalery";
 
 
 export default async function MediaPage() {
@@ -16,7 +17,8 @@ export default async function MediaPage() {
     return (
         <div className="flex-1 w-full flex flex-col gap-20 items-center">
             <StoreProvider>
-                <MediaGalery />
+                <StaticMediaGalery />
+                {/* <MediaGalery /> */}
             </StoreProvider>
         </div>
     );

@@ -8,13 +8,12 @@ export const postFormSchema = z.object({
     content: z.string().min(2, { message: "Content must be at least 2 characters.", }),
     category: z.string().min(2, { message: "Category must be at least 2 characters.", }),
     author: z.string().min(2, { message: "Author must be at least 2 characters.", }),
-
     url: z.string().min(2, { message: "Url must be at least 2 characters.", }).toLowerCase().refine(s => !s.includes(' '), 'Spaces in url is not allowed.'),
-
     status: z.string().min(2, { message: "Status must be at least 2 characters.", }),
     media: z.any(),
     featured_image: z.string(),
-    updated_at: z.string()
+    updated_at: z.string(),
+    scheduled_at: z.nullable(z.string())
 })
 
 

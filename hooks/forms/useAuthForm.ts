@@ -22,15 +22,15 @@ export default function useAuthForm() {
     const onSubmitSignIn = async (data: UserCredentialType) => {
         setError(null);
         const errorMessage = await signIn(data);
-        if(errorMessage) setError(errorMessage);
+        if (errorMessage) setError(errorMessage);
     }
 
     const onSubmitSignUp = async (data: UserCredentialType) => {
         setError(null);
         const errorMessage = await signUp(data);
-        if(errorMessage) setError(errorMessage);
+        if (errorMessage) setError(errorMessage);
     }
 
-    return {form, onSubmitSignIn, onSubmitSignUp, error}
+    return { form, onSubmitSignIn, onSubmitSignUp, error }
 
 }

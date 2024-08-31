@@ -15,9 +15,10 @@ export type PostType = {
     status: string
     url: string
     featured_image: string
+    scheduled_at: string | null
 }
 
-export type PostDataType = Omit<PostType, 'id' | 'created_at' | 'created_by'>;
+export type PostDataType = Omit<PostType, 'id' | 'created_at' | 'created_by' | 'updated_at' | 'scheduled_at'>;
 
 export type UserCredentialType = {
     email: string
