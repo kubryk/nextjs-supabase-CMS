@@ -53,11 +53,11 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
                         <RiImageAddLine color="yellowgreen" size={25} />
                     </Button>
                 </DialogTrigger>
-                <DialogContent className=" min-w-[90%] min-h-[650px]">
-                    <DialogHeader>
+                <DialogContent className=" max-w-[90%] overflow-hidden">
+                    {/* <DialogHeader>
                         <DialogTitle></DialogTitle>
                         <DialogDescription></DialogDescription>
-                    </DialogHeader>
+                    </DialogHeader> */}
                     <MediaGalery post={post} editorField={editorFieldRef} fieldName={fieldName} />
                     <DialogFooter className="sm:justify-start">
                         <DialogClose asChild>

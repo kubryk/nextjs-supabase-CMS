@@ -15,20 +15,18 @@ const MediaList = ({ type, ...rest }: MediaListProps) => {
 
     if (type === 'postMedia') {
         return (
-            <div className={cn(`flex flex-wrap overflow-auto w-auto`, rest.className)} >
-                <div className=" border-[1px] border-gray-200 bg-slate-400">
-                    {postMedia && postMedia.map((media) => {
-                        return (
-                            <div
-                                key={media.id}
-                                onClick={() => dispatch(setSelectedMedia(media))}
-                                className={cn("relative cursor-pointer w-[180px] h-[180px]", selectedMedia && selectedMedia.id === media.id ? "opacity-40" : '')}
-                            >
-                                <MediaListItem media={media} />
-                            </div>
-                        )
-                    })}
-                </div>
+            <div className="p-3 gap-1 flex items-center flex-wrap overflow-auto rounded-lg" >
+                {postMedia && postMedia.map((media) => {
+                    return (
+                        <div
+                            key={media.id}
+                            onClick={() => dispatch(setSelectedMedia(media))}
+                            className={cn("relative cursor-pointer w-[100px] h-[100px]", selectedMedia && selectedMedia.id === media.id ? "opacity-40" : '')}
+                        >
+                            <MediaListItem media={media} />
+                        </div>
+                    )
+                })}
             </div>
         );
     }
@@ -36,7 +34,7 @@ const MediaList = ({ type, ...rest }: MediaListProps) => {
     return (
         <div className={cn(`flex flex-col`, rest.className)}>
 
-            <div className=" p-3 gap-1 flex items-center flex-wrap overflow-auto rounded-lg">
+            <div className=" p-3 gap-1 flex items-center flex-wrap overflow-auto rounded-lg ">
 
                 {media && media.map((media) => {
                     return (

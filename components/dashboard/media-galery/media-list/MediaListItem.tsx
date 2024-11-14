@@ -7,7 +7,6 @@ const MediaListItem = ({ media }: { media: MediaType }) => {
 
     return (
         <Image
-
             fill={true}
             sizes="180"
             quality={1}

@@ -36,7 +36,7 @@ const MediaGalery = ({ post, editorField, form, fieldName = "" }: IMediaGaleryPr
     } = useMediaGalery({ editorField: editorField!, fieldName, form })
 
     return (
-        <div>
+        <div >
             <Tabs defaultValue="media">
                 <TabsList className="flex">
                     <TabsTrigger
