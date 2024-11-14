@@ -1,5 +1,4 @@
 'use client'
-import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -11,15 +10,10 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import signIn from "@/actions/auth/signInAction";
-import { useState } from "react";
-import { UserCredentialType } from "@/types/global";
-import useLogin from "@/hooks/useAuthForm";
+import useLogin from "@/hooks/forms/useAuthForm";
 
 const LoginForm = () => {
-    const {form, onSubmitSignIn, onSubmitSignUp, error} = useLogin();
+    const { form, onSubmitSignIn, onSubmitSignUp, error } = useLogin();
 
     return (
         <Form {...form}>

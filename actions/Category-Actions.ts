@@ -2,6 +2,7 @@
 import useSupabase from '@/hooks/useSupabase'
 import { CategoryDataType, PostCategoryType } from '@/types/global';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
+import { clear } from 'console';
 
 
 
@@ -34,12 +35,14 @@ export const fetchSingleCategoryByAction = async (column: string, value: string)
     return result;
 }
 
-export const createCategoryAction = async (data: CategoryDataType): Promise<PostgrestSingleResponse<PostCategoryType[]>> => {
+export const createCategoryAction = async (data: CategoryDataType): Promise<PostgrestSingleResponse<PostCategoryType>> => {
     const supabase = useSupabase();
-    const result = await supabase
+    const result: PostgrestSingleResponse<PostCategoryType> = await supabase
         .from('categories')
         .insert(data)
-        .select();
+        .select()
+        .limit(1)
+        .single();
     return result;
 }
 
@@ -60,8 +63,8 @@ export const updateCategoryAction = async (data: CategoryDataType, categoryId: s
         .update({ ...data })
         .eq('id', categoryId)
         .select()
-        .limit(1)
         .single();
+    console.log(result)
     return result;
 }
 

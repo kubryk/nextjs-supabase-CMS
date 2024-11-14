@@ -1,12 +1,12 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { UserCredentialType } from "@/types/global";
 
 
-const signIn = async ({email, password}: UserCredentialType) => {
+const signIn = async ({ email, password }: UserCredentialType) => {
     const supabase = createClient();
-    const {error} = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
     });
