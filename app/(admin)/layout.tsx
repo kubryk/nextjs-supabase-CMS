@@ -4,6 +4,7 @@ import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Toaster } from "sonner";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import StoreProvider from "@/providers/StoreProvider";
+import { createClient } from "@/lib/supabase/server";
 
 
 const defaultUrl = process.env.VERCEL_URL
@@ -17,29 +18,26 @@ export const metadata = {
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
     return (
         <html lang="en" className={GeistSans.className}>
             <StoreProvider>
                 <body>
                     <main className="min-h-screen flex ">
-                        <DashboardSidebar />
+                        {user && <DashboardSidebar />}
 
-                        <div className="flex flex-col w-full">
-                            <DashboardHeader />
-
-                            {/* <div className=" w-auto h-full overflow-auto "> */}
+                        <div className="flex flex-col w-full items-center">
+                            {user && <DashboardHeader />}
                             {children}
-                            {/* </div> */}
                         </div>
-
-
-
                     </main>
                     <Toaster richColors expand={true} />
                 </body>

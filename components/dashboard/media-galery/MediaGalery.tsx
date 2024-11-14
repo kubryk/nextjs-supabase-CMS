@@ -22,7 +22,7 @@ interface IMediaGaleryProps {
 }
 
 
-const MediaGalery = ({ post, editorField, fieldName }: IMediaGaleryProps) => {
+const MediaGalery = ({ post, editorField, form, fieldName = "" }: IMediaGaleryProps) => {
     const dispatch = useAppDispatch();
     const {
         media,
@@ -33,7 +33,7 @@ const MediaGalery = ({ post, editorField, fieldName }: IMediaGaleryProps) => {
         onChangeUploadFiles,
         onClickSetFeaturedImage,
         onClickPasteMediaTag
-    } = useMediaGalery({ editorField, fieldName })
+    } = useMediaGalery({ editorField: editorField!, fieldName, form })
 
     return (
         <div>
