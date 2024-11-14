@@ -44,7 +44,7 @@ const MediaForm = () => {
 
     return (
 
-        <div className="  min-w-[300px]  overflow-visible p-3 border-l-[2px] border-gray-200">
+        <div className=" h-[calc(100vh-50px)] min-w-[300px]  overflow-auto p-3 border-l-[2px] border-gray-200">
             {selectedMedia &&
                 <div className="flex flex-col items-center justify-center gap-3">
                     <Image

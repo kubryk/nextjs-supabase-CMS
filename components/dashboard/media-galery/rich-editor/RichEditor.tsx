@@ -53,16 +53,15 @@ const RichEditor = ({ fieldName, post }: { fieldName: string, post: PostType }) 
                         <RiImageAddLine color="yellowgreen" size={25} />
                     </Button>
                 </DialogTrigger>
-                <DialogContent className=" max-w-[90%] overflow-hidden">
-                    {/* <DialogHeader>
-                        <DialogTitle></DialogTitle>
-                        <DialogDescription></DialogDescription>
-                    </DialogHeader> */}
-                    <MediaGalery post={post} editorField={editorFieldRef} fieldName={fieldName} />
+
+                <DialogContent className=" max-w-[90%] h-[80%] overflow-auto ">
+                    <div className=" h-[500px] pb-4">
+                        <MediaGalery post={post} editorField={editorFieldRef} fieldName={fieldName} />
+                    </div>
                     <DialogFooter className="sm:justify-start">
                         <DialogClose asChild>
                             <div className="flex gap-4">
-                                {/* Кнопка вставлення тегу фото */}
+                                {/* Кнопка вставки фото у тектову область */}
                                 {form && editorFieldRef && selectedMedia && fieldName &&
                                     <Button onClick={onClickPasteMediaTag}>
                                         Add media
