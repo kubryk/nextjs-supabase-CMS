@@ -1,10 +1,10 @@
 "use server";
 import { redirect } from "next/navigation";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import { headers } from "next/headers";
 import { UserCredentialType } from "@/types/global";
 
-const signUp = async ({email, password}: UserCredentialType) => {
+const signUp = async ({ email, password }: UserCredentialType) => {
     const origin = headers().get("origin");
     const supabase = createClient();
 

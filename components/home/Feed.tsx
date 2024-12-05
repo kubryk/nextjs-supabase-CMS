@@ -48,7 +48,7 @@ export const Feed = async ({ currentPage, category }: { currentPage: number, cat
 
 
         return (
-            <section className="animate-in zoom-in duration-200 flex-1 flex flex-col gap-20 max-w-4xl px-3">
+            <section className="animate-in zoom-in duration-200 flex-1 flex flex-col gap-20 max-w-4xl px-3 p-8">
                 <Container>
                     <div className="flex flex-col gap-8">
                         {/* {!pagePostsByCategory.data && <div>Posts not found</div>} */}
@@ -87,7 +87,7 @@ export const Feed = async ({ currentPage, category }: { currentPage: number, cat
     const totalPages = Math.ceil(posts.data.length / 6);
 
     return (
-        <section className="animate-in zoom-in duration-200 flex-1 flex flex-col gap-20 max-w-4xl px-3">
+        <section className="animate-in zoom-in duration-200 flex-1 flex flex-col gap-20 max-w-4xl px-3 p-8">
             <Container>
                 <div className="flex flex-col gap-8">
                     {pagePosts.data.map((post) => {

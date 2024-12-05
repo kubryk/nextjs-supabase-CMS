@@ -1,10 +1,17 @@
 import Link from "next/link";
-import { SubmitButton } from "../../../components/auth/submit-button";
-import signIn from "@/actions/auth/signInAction";
+// import { SubmitButton } from "../../../components/auth/submit-button";
+// import signIn from "@/actions/auth/signInAction";
 import LoginForm from "../../../components/auth/LoginForm";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function LoginPage({searchParams}: {searchParams: { message: string }}) {
+export default async function LoginPage({ searchParams }: { searchParams: { message: string } }) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
+  if (user) {
+    redirect("/dashboard");
+  }
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Link
@@ -13,7 +20,7 @@ export default function LoginPage({searchParams}: {searchParams: { message: stri
       >
         Back
       </Link>
-      <LoginForm/>
+      <LoginForm />
     </div>
   );
 }

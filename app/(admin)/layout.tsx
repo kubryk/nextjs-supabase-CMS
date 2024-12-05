@@ -1,7 +1,11 @@
 import { GeistSans } from "geist/font/sans";
 import "../globals.css";
-import CPNavigation from "@/components/control-panel/CP-Navigation";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Toaster } from "sonner";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import StoreProvider from "@/providers/StoreProvider";
+import { createClient } from "@/lib/supabase/server";
+
 
 const defaultUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
@@ -14,21 +18,30 @@ export const metadata = {
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
 
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
     return (
         <html lang="en" className={GeistSans.className}>
-            <body>
-                <main className="min-h-screen flex flex-col items-center ">
-                    <CPNavigation />
-                    {children}
-                </main>
-                <Toaster richColors expand={true}/>
-            </body>
+            <StoreProvider>
+                <body>
+                    <main className="min-h-screen flex ">
+                        {user && <DashboardSidebar />}
+
+                        <div className="flex flex-col w-full items-center">
+                            {user && <DashboardHeader />}
+                            {children}
+                        </div>
+                    </main>
+                    <Toaster richColors expand={true} />
+                </body>
+            </StoreProvider>
         </html>
     );
 }
